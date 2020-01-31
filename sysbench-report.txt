@@ -1,0 +1,242 @@
+./tpcc.lua --pgsql-user=postgres --pgsql-db=postgres --time=36000 --threads=56 --report-interval=1 --tables=10 --scale=100 --use_fk=0  --trx_level=RC --pgsql-password=postgres --db-driver=pgsql run
+
+sysbench \
+--db-driver=pgsql \
+--oltp-table-size=100000 \
+--oltp-tables-count=24 \
+--threads=1 \
+--pgsql-host=0.0.0.0 \
+--pgsql-port=5432 \
+--pgsql-user=postgres \
+--pgsql-password=postgres \
+--pgsql-db=postgres \
+/usr/share/sysbench/tests/include/oltp_legacy/parallel_prepare.lua \
+run
+############################
+SQL statistics:
+    queries performed:
+        read:                            0
+        write:                           912
+        other:                           48
+        total:                           960
+    transactions:                        1      (0.02 per sec.)
+    queries:                             960    (16.49 per sec.)
+    ignored errors:                      0      (0.00 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          58.2281s
+    total number of events:              1
+
+Latency (ms):
+         min:                                58227.79
+         avg:                                58227.79
+         max:                                58227.79
+         95th percentile:                    58263.41
+         sum:                                58227.79
+
+Threads fairness:
+    events (avg/stddev):           1.0000/0.00
+    execution time (avg/stddev):   58.2278/0.00
+
+
+sysbench \
+--db-driver=pgsql \
+--oltp-table-size=100000 \
+--oltp-tables-count=24 \
+--threads=1 \
+--pgsql-host=0.0.0.0 \
+--pgsql-port=6432 \
+--pgsql-user=postgres \
+--pgsql-password=postgres \
+--pgsql-db=postgres \
+/usr/share/sysbench/tests/include/oltp_legacy/parallel_prepare.lua \
+run
+################
+SQL statistics:
+    queries performed:
+        read:                            0
+        write:                           912
+        other:                           48
+        total:                           960
+    transactions:                        1      (0.02 per sec.)
+    queries:                             960    (18.06 per sec.)
+    ignored errors:                      0      (0.00 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          53.1636s
+    total number of events:              1
+
+Latency (ms):
+         min:                                53163.15
+         avg:                                53163.15
+         max:                                53163.15
+         95th percentile:                    53247.01
+         sum:                                53163.15
+
+Threads fairness:
+    events (avg/stddev):           1.0000/0.00
+    execution time (avg/stddev):   53.1632/0.00
+#####################
+psql -U postgres -h 0.0.0.0 -p 5432 -W -c '\dt+\'
+
+
+
+sysbench \
+--db-driver=pgsql \
+--report-interval=2 \
+--oltp-table-size=100000 \
+--oltp-tables-count=24 \
+--threads=56 \
+--time=60 \
+--pgsql-host=0.0.0.0 \
+--pgsql-port=5432 \
+--pgsql-user=postgres \
+--pgsql-password=postgres \
+--pgsql-db=postgres \
+/usr/share/sysbench/tests/include/oltp_legacy/oltp.lua \
+run
+#####################
+SQL statistics:
+    queries performed:
+        read:                            125678
+        write:                           35860
+        other:                           17986
+        total:                           179524
+    transactions:                        8969   (146.87 per sec.)
+    queries:                             179524 (2939.73 per sec.)
+    ignored errors:                      8      (0.13 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          61.0610s
+    total number of events:              8969
+
+Latency (ms):
+         min:                                   11.09
+         avg:                                  376.99
+         max:                                 3205.15
+         95th percentile:                      861.95
+         sum:                              3381239.68
+
+Threads fairness:
+    events (avg/stddev):           160.1607/3.08
+    execution time (avg/stddev):   60.3793/0.16
+###############################
+sysbench \
+--db-driver=pgsql \
+--report-interval=2 \
+--oltp-table-size=100000 \
+--oltp-tables-count=24 \
+--threads=56 \
+--time=60 \
+--pgsql-host=0.0.0.0 \
+--pgsql-port=6432 \
+--pgsql-user=postgres \
+--pgsql-password=postgres \
+--pgsql-db=postgres \
+/usr/share/sysbench/tests/include/oltp_legacy/oltp.lua \
+run
+##############################
+SQL statistics:
+    queries performed:
+        read:                            109592
+        write:                           31272
+        other:                           15672
+        total:                           156536
+    transactions:                        7816   (129.87 per sec.)
+    queries:                             156536 (2601.03 per sec.)
+    ignored errors:                      12     (0.20 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          60.1808s
+    total number of events:              7816
+
+Latency (ms):
+         min:                                   15.17
+         avg:                                  430.49
+         max:                                 6842.68
+         95th percentile:                      846.57
+         sum:                              3364694.66
+
+Threads fairness:
+    events (avg/stddev):           139.5714/1.80
+    execution time (avg/stddev):   60.0838/0.08
+
+###########################################
+sysbench \
+--db-driver=pgsql \
+--report-interval=2 \
+--oltp-table-size=100000 \
+--oltp-tables-count=24 \
+--threads=150 \
+--time=60 \
+--pgsql-host=0.0.0.0 \
+--pgsql-port=5432 \
+--pgsql-user=postgres \
+--pgsql-password=postgres \
+--pgsql-db=postgres \
+/usr/share/sysbench/tests/include/oltp_legacy/oltp.lua \
+run
+############################################
+Initializing worker threads...
+
+Threads started!
+
+FATAL: Connection to database failed: FATAL:  sorry, too many clients already
+
+FATAL: `thread_run' function failed: /usr/share/sysbench/tests/include/oltp_legacy/oltp.lua:43: Failed to connect to the database
+FATAL: Connection to database failed: FATAL:  sorry, too many clients already
+
+FATAL: `thread_run' function failed: /usr/share/sysbench/tests/include/oltp_legacy/oltp.lua:43: Failed to connect to the database
+FATAL: Connection to database failed: FATAL:  sorry, too many clients already
+
+FATAL: `thread_run' function failed: /usr/share/sysbench/tests/include/oltp_legacy/oltp.lua:43: Failed to connect to the database
+FATAL: Connection to database failed: FATAL:  sorry, too many clients already
+
+FATAL: `thread_run' function failed: /usr/share/sysbench/tests/include/oltp_legacy/oltp.lua:43: Failed to connect to the database
+#############################################3
+sysbench \
+--db-driver=pgsql \
+--report-interval=2 \
+--oltp-table-size=100000 \
+--oltp-tables-count=24 \
+--threads=150 \
+--time=60 \
+--pgsql-host=0.0.0.0 \
+--pgsql-port=6432 \
+--pgsql-user=postgres \
+--pgsql-password=postgres \
+--pgsql-db=postgres \
+/usr/share/sysbench/tests/include/oltp_legacy/oltp.lua \
+run
+################################################
+SQL statistics:
+    queries performed:
+        read:                            164430
+        write:                           46920
+        other:                           23530
+        total:                           234880
+    transactions:                        11735  (192.61 per sec.)
+    queries:                             234880 (3855.16 per sec.)
+    ignored errors:                      10     (0.16 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          60.9246s
+    total number of events:              11735
+
+Latency (ms):
+         min:                                  110.23
+         avg:                                  773.32
+         max:                                 3057.33
+         95th percentile:                     1427.08
+         sum:                              9074865.96
+
+Threads fairness:
+    events (avg/stddev):           78.2333/0.96
+    execution time (avg/stddev):   60.4991/0.31
+
+

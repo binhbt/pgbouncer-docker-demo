@@ -1,0 +1,2 @@
+"postgres" "md51d1fc104cde4dddff0712788dc2e1fed"
+"admin" "md5f6fdffe48c908deb0f4c3bd36c032e72"
