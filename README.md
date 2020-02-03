@@ -16,7 +16,8 @@ This is a simple project to install, configure and monitor [PgBouncer](https://p
 Download the [docker-compose](https://docs.docker.com/compose/) file:
 
 ```sh
-wget https://raw.githubusercontent.com/guedim/docker-postgres-pgbouncer/master/docker-compose.yml
+git clone https://github.com/binhbt/pgbouncer-docker-demo
+docker-compose up
 ```
 
 Later, start the services ([Postgres](https://www.postgresql.org/) - [PgBouncer](https://pgbouncer.github.io) - [PgAdmin](https://www.pgadmin.org)) using [docker-compose](https://docs.docker.com/compose/):
@@ -84,6 +85,15 @@ Finally, you can query the [PgBouncer stats](https://pgbouncer.github.io/usage.h
 <img src="https://github.com/guedim/docker-postgres-pgbouncer/blob/master/resources/images/monitoring.png" height="250" width="800" >
 </p>
 
+### Install PGBOUNCER for testing  
+```sh
+$ curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.deb.sh | sudo bash
+$ sudo apt -y install sysbench
+git clone https://github.com/binhbt/pgbouncer-docker-demo
+docker-compose up
+```  
+### Script test  
+https://github.com/binhbt/pgbouncer-docker-demo/blob/master/sysbench-report.txt    
 
 ### References<a name="references"></a>
 
