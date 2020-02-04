@@ -20,13 +20,7 @@ services:
       POSTGRES_DB: postgres       # define database
     ports:
       - 5432:5432   
-    # command:
-    #   - "postgres"
-    #   - "-c"
-    #   - "max_connections=1000"
-    #   - "-c"
-    #   - "shared_buffers=3GB"
-    #   - "-c"   
+    command: postgres -c 'max_connections=10000' -c 'shared_buffers=512MB'
   # Postgres database.
   pgbouncer:
     image: brainsam/pgbouncer:1.7.2
@@ -37,7 +31,7 @@ services:
       DB_port: 5432
       POOL_MODE: transaction
       DEFAULT_POOL_SIZE: 56
-      MAX_CLIENT_CONN: 6000
+      MAX_CLIENT_CONN: 10000
     # volumes:
     #   - ./pgbouncer:/etc/pgbouncer
     links:
